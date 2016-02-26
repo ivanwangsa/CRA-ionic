@@ -205,10 +205,22 @@ angular.module('conFusion.controllers', [])
                 $scope.promotion = menuFactory.getPromotion().get({id:0});
 }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', function($scope, corporateFactory, baseURL) {
 
-  $scope.leaders = corporateFactory.query();
-  console.log($scope.leaders);
+  $scope.message = "Loading...";
+  $scope.showLeaders = false;
+  $scope.baseURL = baseURL;
+  
+  corporateFactory.query().$promise.then(
+    function(response){
+      $scope.leaders = response;
+      $scope.showLeaders = true;
+    },
+    function(response){
+      $scope.message = "Error: " + response.status + " " + response.statusText;
+    }
+  );
+
 
 }])
 
