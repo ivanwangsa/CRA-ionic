@@ -41,6 +41,7 @@ angular.module('conFusion.controllers', [])
     }, 1000);
   };
 
+  // create modal for reservation
   $ionicModal.fromTemplateUrl('templates/reserve.html', {
     scope: $scope
   }).then(function(modal) {
@@ -62,6 +63,7 @@ angular.module('conFusion.controllers', [])
       $scope.closeReserve();
     }, 1000);
   };
+
 })
 
 .controller('MenuController', ['$scope', 'menuFactory', 'baseURL', 'favoriteFactory', '$ionicListDelegate', function($scope, menuFactory, baseURL, favoriteFactory, $ionicListDelegate) {
@@ -162,7 +164,7 @@ angular.module('conFusion.controllers', [])
   };
 }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', function($scope, $stateParams, menuFactory, baseURL) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', 'favoriteFactory', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover, favoriteFactory) {
 
   $scope.baseURL = baseURL;
   $scope.dish = {};
@@ -182,6 +184,38 @@ angular.module('conFusion.controllers', [])
       }
     );
 
+
+    // create popover for comments
+    $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+      scope: $scope
+    }).then(function(popover){
+      $scope.popover = popover;
+    });
+
+    $scope.openPopover = function($event) {
+      $scope.popover.show($event);
+    };
+
+    $scope.closePopover = function() {
+      $scope.popover.hide();
+    };
+
+    $scope.$on('$destroy', function(){
+      $scope.popover.remove();
+    });
+
+    $scope.$on('popover.hidden', function() {
+
+    });
+
+    $scope.$on('popover.removed', function(){
+
+    });
+
+    $scope.addFavorite = function() {
+      favoriteFactory.addToFavorites($scope.dish.id);
+      $scope.closePopover();
+    };
 
 }])
 
