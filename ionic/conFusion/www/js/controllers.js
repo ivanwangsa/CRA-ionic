@@ -185,37 +185,37 @@ angular.module('conFusion.controllers', [])
     );
 
 
-    // create popover for comments
-    $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
-      scope: $scope
-    }).then(function(popover){
-      $scope.popover = popover;
-    });
+  // create popover for comments
+  $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
 
-    $scope.openPopover = function($event) {
-      $scope.popover.show($event);
-    };
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
 
-    $scope.closePopover = function() {
-      $scope.popover.hide();
-    };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
 
-    $scope.$on('$destroy', function(){
-      $scope.popover.remove();
-    });
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+  });
 
-    $scope.$on('popover.hidden', function() {
+  $scope.$on('popover.hidden', function() {
 
-    });
+  });
 
-    $scope.$on('popover.removed', function(){
+  $scope.$on('popover.removed', function() {
 
-    });
+  });
 
-    $scope.addFavorite = function() {
-      favoriteFactory.addToFavorites($scope.dish.id);
-      $scope.closePopover();
-    };
+  $scope.addFavorite = function() {
+    favoriteFactory.addToFavorites($scope.dish.id);
+    $scope.closePopover();
+  };
 
 }])
 
@@ -231,7 +231,6 @@ angular.module('conFusion.controllers', [])
   $scope.submitComment = function() {
 
     $scope.mycomment.date = new Date().toISOString();
-    console.log($scope.mycomment);
 
     $scope.dish.comments.push($scope.mycomment);
     menuFactory.getDishes().update({
@@ -312,13 +311,14 @@ angular.module('conFusion.controllers', [])
   menuFactory.getDishes().query(
     function(response) {
       $scope.dishes = response;
-      $timeout(function(){
+      $timeout(function() {
         $ionicLoading.hide();
       }, 1000);
     },
     function(response) {
-      $scope.message = "Error: " + response.status + " " + response.statusText;$scope.dishes = response;
-      $timeout(function(){
+      $scope.message = "Error: " + response.status + " " + response.statusText;
+      $scope.dishes = response;
+      $timeout(function() {
         $ionicLoading.hide();
       }, 1000);
     });
@@ -329,8 +329,8 @@ angular.module('conFusion.controllers', [])
       template: 'Are you sure you want to delete this item?'
     });
 
-    confirmPopup.then(function(res){
-      if (res){
+    confirmPopup.then(function(res) {
+      if (res) {
         console.log('OK to delete');
         favoriteFactory.deleteFromFavorites(index);
       } else {
@@ -342,12 +342,12 @@ angular.module('conFusion.controllers', [])
 
 }])
 
-.filter('favoriteFilter', function(){
-  return function(dishes, favorites){
+.filter('favoriteFilter', function() {
+  return function(dishes, favorites) {
     var out = [];
 
-    for (var i = 0; i < favorites.length; i++){
-      for (var j = 0; j < dishes.length; j++){
+    for (var i = 0; i < favorites.length; i++) {
+      for (var j = 0; j < dishes.length; j++) {
         if (dishes[j].id === favorites[i].id)
           out.push(dishes[j]);
       }
