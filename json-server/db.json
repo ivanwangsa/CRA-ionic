@@ -47,7 +47,7 @@
       "image": "images/zucchipakoda.png",
       "category": "appetizer",
       "label": "",
-      "price": "1.99",
+      "price": 1.99,
       "description": "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce",
       "comments": [
         {
@@ -79,6 +79,24 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "rating": "2",
+          "comment": "Enak yuk!",
+          "author": "Makan",
+          "date": "2016-03-07T15:33:47.804Z"
+        },
+        {
+          "rating": "2",
+          "author": "Makan",
+          "comment": "So Nice!",
+          "date": "2016-03-07T15:39:06.111Z"
+        },
+        {
+          "rating": 5,
+          "comment": "",
+          "author": "",
+          "date": "2016-03-07T15:39:06.174Z"
         }
       ]
     },
@@ -88,7 +106,7 @@
       "image": "images/vadonut.png",
       "category": "appetizer",
       "label": "New",
-      "price": "1.99",
+      "price": 1.99,
       "description": "A quintessential ConFusion experience, is it a vada or is it a donut?",
       "comments": [
         {
@@ -120,6 +138,24 @@
           "comment": "It's your birthday, we're gonna party!",
           "author": "25 Cent",
           "date": "2011-12-02T17:57:28.556094Z"
+        },
+        {
+          "rating": "3",
+          "comment": "Wangsa",
+          "author": "Ivan",
+          "date": "2016-03-07T15:32:39.282Z"
+        },
+        {
+          "rating": "3",
+          "comment": "Wangsa",
+          "author": "Ivan",
+          "date": "2016-03-07T15:32:39.282Z"
+        },
+        {
+          "rating": "3",
+          "comment": "Wangsa",
+          "author": "Ivan",
+          "date": "2016-03-07T15:32:39.282Z"
         }
       ]
     },

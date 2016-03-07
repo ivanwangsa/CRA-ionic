@@ -164,7 +164,7 @@ angular.module('conFusion.controllers', [])
   };
 }])
 
-.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', 'favoriteFactory', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover, favoriteFactory) {
+.controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', '$ionicModal', 'favoriteFactory', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover, $ionicModal, favoriteFactory) {
 
   $scope.baseURL = baseURL;
   $scope.dish = {};
@@ -215,6 +215,44 @@ angular.module('conFusion.controllers', [])
   $scope.addFavorite = function() {
     favoriteFactory.addToFavorites($scope.dish.id);
     $scope.closePopover();
+  };
+
+  // create modal for form
+
+  $scope.mycomment = {};
+
+  $ionicModal.fromTemplateUrl('templates/comment.html', {
+    scope: $scope
+  }).then(function(modal){
+    $scope.commentForm = modal;
+  });
+
+  $scope.closeComment = function() {
+    $scope.commentForm.hide();
+  };
+
+  $scope.comment = function() {
+    $scope.commentForm.show();
+  };
+
+  $scope.doComment = function() {
+    console.log('Submitting comment', $scope.mycomment);
+
+    $scope.mycomment.date = new Date().toISOString();
+
+    $scope.dish.comments.push($scope.mycomment);
+    menuFactory.getDishes().update({
+      id: $scope.dish.id
+    }, $scope.dish);
+
+    $scope.mycomment = {
+      rating: 5,
+      comment: "",
+      author: "",
+      date: ""
+    };
+
+    $scope.closeComment();
   };
 
 }])
