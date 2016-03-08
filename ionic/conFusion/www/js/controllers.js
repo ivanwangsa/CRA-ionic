@@ -35,7 +35,7 @@ angular.module('conFusion.controllers', [])
     console.log('Doing login', $scope.loginData);
 
     $localStorage.storeObject('userinfo', $scope.loginData);
-    
+
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
@@ -68,24 +68,14 @@ angular.module('conFusion.controllers', [])
 
 })
 
-.controller('MenuController', ['$scope', 'menuFactory', 'baseURL', 'favoriteFactory', '$ionicListDelegate', function($scope, menuFactory, baseURL, favoriteFactory, $ionicListDelegate) {
+.controller('MenuController', ['$scope', 'dishes', 'baseURL', 'favoriteFactory', '$ionicListDelegate', function($scope, dishes, baseURL, favoriteFactory, $ionicListDelegate) {
 
   $scope.baseURL = baseURL;
   $scope.tab = 1;
   $scope.filtText = '';
   $scope.showDetails = false;
-  $scope.showMenu = false;
-  $scope.message = "Loading ...";
-
-  menuFactory.query(
-    function(response) {
-      $scope.dishes = response;
-      $scope.showMenu = true;
-    },
-    function(response) {
-      $scope.message = "Error: " + response.status + " " + response.statusText;
-    });
-
+  $scope.showMenu = true;
+  $scope.dishes = dishes;
 
   $scope.select = function(setTab) {
     $scope.tab = setTab;
@@ -276,46 +266,20 @@ angular.module('conFusion.controllers', [])
 }])
 
 // implement the IndexController and About Controller here
-.controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', 'promotionFactory', 'baseURL', function($scope, menuFactory, corporateFactory, promotionFactory, baseURL) {
+.controller('IndexController', ['$scope', 'dish', 'promotion', 'leadership', 'baseURL', function($scope, dish, promotion, leadership, baseURL) {
 
   $scope.baseURL = baseURL;
-  $scope.leader = corporateFactory.get({
-    id: 3
-  });
-  $scope.showDish = false;
-  $scope.message = "Loading ...";
-  $scope.dish = menuFactory.get({
-      id: 0
-    })
-    .$promise.then(
-      function(response) {
-        $scope.dish = response;
-        $scope.showDish = true;
-      },
-      function(response) {
-        $scope.message = "Error: " + response.status + " " + response.statusText;
-      }
-    );
-  $scope.promotion = promotionFactory.get({
-    id: 0
-  });
+  $scope.leader = leadership;
+  $scope.dish = dish;
+  $scope.promotion = promotion;
+
 }])
 
-.controller('AboutController', ['$scope', 'corporateFactory', 'baseURL', function($scope, corporateFactory, baseURL) {
+.controller('AboutController', ['$scope', 'leaders', 'baseURL', function($scope, leaders, baseURL) {
 
-  $scope.message = "Loading...";
-  $scope.showLeaders = false;
+  $scope.showLeaders = true;
   $scope.baseURL = baseURL;
-
-  corporateFactory.query().$promise.then(
-    function(response) {
-      $scope.leaders = response;
-      $scope.showLeaders = true;
-    },
-    function(response) {
-      $scope.message = "Error: " + response.status + " " + response.statusText;
-    }
-  );
+  $scope.leaders = leaders;
 
 }])
 
