@@ -156,6 +156,12 @@
           "comment": "Wangsa",
           "author": "Ivan",
           "date": "2016-03-07T15:32:39.282Z"
+        },
+        {
+          "rating": "2",
+          "author": "Ivan Wngsa",
+          "comment": "Wow!",
+          "date": "2016-03-12T04:03:49.496Z"
         }
       ]
     },

@@ -68,7 +68,7 @@ angular.module('conFusion.controllers', [])
 
 })
 
-.controller('MenuController', ['$scope', 'dishes', 'baseURL', 'favoriteFactory', '$ionicListDelegate', function($scope, dishes, baseURL, favoriteFactory, $ionicListDelegate) {
+.controller('MenuController', ['$scope', 'dishes', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast', function ($scope, dishes, favoriteFactory, baseURL, $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
 
   $scope.baseURL = baseURL;
   $scope.tab = 1;
@@ -104,6 +104,7 @@ angular.module('conFusion.controllers', [])
 
     favoriteFactory.addToFavorites(index);
     $ionicListDelegate.closeOptionButtons();
+
   };
 }])
 
@@ -202,7 +203,7 @@ angular.module('conFusion.controllers', [])
 
   $ionicModal.fromTemplateUrl('templates/comment.html', {
     scope: $scope
-  }).then(function(modal){
+  }).then(function(modal) {
     $scope.commentForm = modal;
   });
 
